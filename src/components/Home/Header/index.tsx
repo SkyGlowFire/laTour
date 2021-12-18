@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Logo from './Logo';
 import Navbar from './Navbar';
@@ -47,7 +47,12 @@ const Header: FC<{ offsetY: number | null }> = ({ offsetY }) => {
   return (
     <StyledHeader wrapped={Boolean(offsetY)} id="Home">
       <Navbar />
-      <StyledVideo src="/video/header.mp4" autoPlay muted loop />
+      <StyledVideo
+        src="https://latour.s3.eu-north-1.amazonaws.com/video/header.mp4"
+        autoPlay
+        muted
+        loop
+      />
       <Logo wrapped={Boolean(offsetY)} />
     </StyledHeader>
   );

@@ -11,7 +11,7 @@ export interface Offer {
 export const offers: Offer[] = [
   {
     id: 1,
-    media: { type: 'video', url: '/video/diving.mp4' },
+    media: { type: 'video', url: 'https://latour.s3.eu-north-1.amazonaws.com/video/diving.mp4' },
     title: 'Dive & Sea',
     text: 'An incredible world of rich marine life is waiting for you to dive in. Certified divers can take advantage of our Dive & Sea package including breakfast, dinner, and 20 boat dives. Complimentary PCR testing for 2 persons for stays of 5 nights or more.',
     description: `An incredible world of rich marine life is waiting for you to dive in.Certified divers can take advantage of our Dive & Sea package and explore the wonders of excellent dive sites like Kandooma Caves, Cocoa Corner, and Kandooma Thila. Divers can expect to witness and swim alongside a plethora of marine life including eagle rays, grey sharks, unicorn fish, turtles, and even more. More experienced divers will be sure to bask in the adrenaline of our dive sites’ challenging elements and battling the ocean’s current while enjoying the colourful scenery. There’s plenty to explore underwater with Kandooma Dive Centre, with dives catering to divers of all experiences so that there’s something exciting for everyone.`,
@@ -20,7 +20,7 @@ export const offers: Offer[] = [
   },
   {
     id: 2,
-    media: { type: 'video', url: '/video/book.mp4' },
+    media: { type: 'video', url: 'https://latour.s3.eu-north-1.amazonaws.com/video/book.mp4' },
     title: 'Stay Longer and Save',
     text: 'When you stay for a minimum of 4 nights at Holiday Inn Resort Kandooma Maldives, we’ll give you extra benefits, in addition to paying a lesser rate. Enjoy 20% discount on dining and laundry, with complimentary breakfast! Complimentary PCR testing for 2 persons for stays of 5 nights or more.',
     description: 'When you stay for a minimum of 4 nights at Holiday Inn Resort Kandooma Maldives, we’ll give you extra benefits, in addition to paying a lesser rate. Enjoy 20% discount on dining and laundry, with complimentary breakfast!',

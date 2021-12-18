@@ -17,7 +17,7 @@ const Home = () => {
       <Intro offsetY={offsetY} />
       <Villas />
       <VideoBanner
-        video={'/video/boat.mp4'}
+        video={'https://latour.s3.eu-north-1.amazonaws.com/video/boat.mp4'}
         title="Arrive in style."
         text={[
           'Speed across jewel-toned waters with breeze in your hair.',
