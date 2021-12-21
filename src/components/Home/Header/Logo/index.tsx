@@ -25,7 +25,8 @@ const show = keyframes`
 const StyledLogo = styled.div<{ wrapped: boolean }>`
   position: absolute;
   opacity: 0;
-  animation: ${scale} 0.7s linear 3.2s 1 forwards, ${show} 0.4s linear 1 forward;
+  animation: ${show} 0.4s linear 1 forwards,
+    ${scale} 0.7s linear 3.2s 1 forwards;
   animation-play-state: ${(p) => (p.wrapped ? 'paused' : 'running')};
   top: ${(p) => (p.wrapped ? '4rem' : '50%')};
   left: 50%;
