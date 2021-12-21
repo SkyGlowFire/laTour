@@ -16,9 +16,16 @@ const scale = keyframes`
     }
 `;
 
+const show = keyframes`
+    to{
+        opacity: 1
+    }
+`;
+
 const StyledLogo = styled.div<{ wrapped: boolean }>`
   position: absolute;
-  animation: ${scale} 0.7s linear 2s 1 forwards;
+  opacity: 0;
+  animation: ${scale} 0.7s linear 3.2s 1 forwards, ${show} 0.4s linear 1 forward;
   animation-play-state: ${(p) => (p.wrapped ? 'paused' : 'running')};
   top: ${(p) => (p.wrapped ? '4rem' : '50%')};
   left: 50%;
@@ -43,7 +50,7 @@ const StyledSvg = styled.svg`
 const TextPath = styled.path<{ wrapped: boolean }>`
   stroke-dasharray: 140;
   stroke-dashoffset: ${(p) => (p.wrapped ? 0 : 140)};
-  animation: ${handwriting} 2s linear 0.3s 1 forwards;
+  animation: ${handwriting} 2s linear 0.5s 1 forwards;
   clip-path: url(#clipPath17784);
   animation-play-state: ${(p) => (p.wrapped ? 'paused' : 'running')};
 `;
