@@ -44,7 +44,7 @@ const Navbar: FC = () => {
     <StyledNav
       initial="hidden"
       animate="visible"
-      transition={{ staggerChildren: 0.3, delayChildren: 2.1 }}
+      transition={{ staggerChildren: 0.3, delayChildren: 3.6 }}
     >
       {links.map((link) => (
         <NavLink href={`#${link}`} variants={variants}>
