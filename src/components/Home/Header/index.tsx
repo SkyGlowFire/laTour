@@ -28,8 +28,8 @@ const StyledHeader = styled.header<{ wrapped: boolean }>`
   justify-content: center;
   clip-path: ${(p) =>
     p.wrapped ? 'circle(400vh at 50% -365vh)' : 'circle(400vh at 50% -270vh)'};
-  animation: ${wrap} 0.5s linear 2.1s 1 forwards,
-    ${resizeHeader} 0.5s linear 2.2s 1 forwards;
+  animation: ${wrap} 0.7s linear 3s 1 forwards,
+    ${resizeHeader} 0.5s linear 3.1s 1 forwards;
   animation-play-state: ${(p) => (p.wrapped ? 'paused' : 'running')};
 `;
 
