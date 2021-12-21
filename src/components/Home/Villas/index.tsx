@@ -1,6 +1,5 @@
 import Container from '~/components/styled/Container';
 import VillaCard from '~/components/common/VillaCard';
-// import Carousel from '~/components/styled/Carousel';
 import Carousel from '~/components/common/Carousel';
 
 import { villas } from '~/data/villas';
