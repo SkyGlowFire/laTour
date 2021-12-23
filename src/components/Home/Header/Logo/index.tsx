@@ -1,44 +1,17 @@
+import { motion, Variants } from 'framer-motion';
 import { FC } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
-const handwriting = keyframes`
-    to{
-        stroke-dashoffset: 0;
-    }
-`;
-
-const scale = keyframes`
-    to{
-        width: 50%;
-        height: 45%;
-        top: 4rem;
-        transform: translate(-50%, 0);
-    }
-`;
-
-const show = keyframes`
-    to{
-        opacity: 1
-    }
-`;
-
-const StyledLogo = styled.div<{ wrapped: boolean }>`
+const StyledLogo = styled(motion.div)<{ wrapped: boolean }>`
   position: absolute;
-  opacity: 0;
-  animation: ${show} 0.4s linear 1 forwards,
-    ${scale} 0.7s linear 3.2s 1 forwards;
-  animation-play-state: ${(p) => (p.wrapped ? 'paused' : 'running')};
   top: ${(p) => (p.wrapped ? '4rem' : '50%')};
   left: 50%;
   transform: ${(p) =>
     p.wrapped ? 'translate(-50%, 0)' : 'translate(-50%, -50%)'};
-  width: ${(p) => (p.wrapped ? '50%' : '50%')};
-  height: ${(p) => (p.wrapped ? '45%' : '25%')};
-  @media ${(p) => p.theme.breakpoints.md} {
-    height: ${(p) => (p.wrapped ? '45%' : '50%')};
-  }
+  width: 50%;
+  height: ${(p) => (p.wrapped ? '45%' : '25%')}
   max-height: 240px;
-  max-width: 360px;
+  max-width: 320px;
   border: 3px solid #fff;
 `;
 
@@ -48,23 +21,78 @@ const StyledSvg = styled.svg`
   position: relative;
 `;
 
-const TextPath = styled.path<{ wrapped: boolean }>`
-  stroke-dasharray: 140;
-  stroke-dashoffset: ${(p) => (p.wrapped ? 0 : 140)};
-  animation: ${handwriting} 2s linear 0.5s 1 forwards;
+const TextPath = styled(motion.path)`
+  stroke-width: 1px;
   clip-path: url(#clipPath17784);
-  animation-play-state: ${(p) => (p.wrapped ? 'paused' : 'running')};
 `;
+
+const textVariants: Variants = {
+  from: {
+    pathLength: 0,
+  },
+  to: {
+    pathLength: 1,
+    transition: {
+      duration: 2,
+      ease: 'linear',
+      delay: 0.5,
+    },
+  },
+};
+
+const mainVariants: Variants = {
+  from: {
+    opacity: 0,
+    height: '25%',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
+  },
+  to: {
+    height: '100px',
+    top: '4rem',
+    transform: 'translate(-50%, 0)',
+    opacity: 1,
+    transition: {
+      opacity: {
+        duration: 0.5,
+        delay: 0,
+      },
+      default: {
+        delay: 2.5,
+        duration: 0.6,
+      },
+    },
+  },
+};
+
+const mainVariants2: Variants = {
+  from: {
+    opacity: 0,
+  },
+  to: {
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+    },
+  },
+};
 
 const Logo: FC<{ wrapped: boolean }> = ({ wrapped }) => {
   return (
-    <StyledLogo wrapped={wrapped}>
+    <StyledLogo
+      wrapped={wrapped}
+      initial="from"
+      whileInView="to"
+      viewport={{ once: true }}
+      variants={!wrapped ? mainVariants : mainVariants2}
+    >
       <StyledSvg
         width="230mm"
         height="80mm"
         version="1.1"
         viewBox="0 0 230 80"
         xmlns="http://www.w3.org/2000/svg"
+        as={motion.svg}
       >
         <clipPath id="clipPath17784">
           <path d="m36.959 58.727q-2.1704 3.6122-2.5321 4.2478-0.35657 0.63562-0.35657 0.84232 0 0.23254 0.19637 0.23254 0.43408 0 1.5916-1.6381 0.02584-0.05168 0.06201-0.05168 0.02067 0.0052 0.02067 0.03101 0 0.03101-0.05168 0.08268l-0.22221 0.30489q-0.97668 1.3488-1.4418 1.3488-0.22221 0-0.3669-0.16536-0.13953-0.17053-0.13953-0.42891 0-0.28422 0.12919-0.54777 0.13436-0.26872 0.89917-1.54 0.93534-1.5555 1.5761-2.6975 0.15503 0.04134 0.27388 0.04134 0.19637 0 0.36174-0.06201z" />
@@ -75,12 +103,11 @@ const Logo: FC<{ wrapped: boolean }> = ({ wrapped }) => {
           <path d="m56.994 62.391q0 0.04134-0.31006 0.37724-0.39274 0.43408-0.73897 0.43408-0.39274 0-0.39274-0.45475 0-0.14469 0.06201-0.3669-0.32556 0.28422-0.53227 0.56327-0.20154 0.27905-0.7028 1.1369-0.27388-0.02067-0.32039-0.02067-0.02067 0-0.31523 0.02067l0.84749-1.3746q0.63562-1.0335 0.63562-1.2816 0-0.14469-0.11886-0.14469-0.28939 0-1.049 1.111-0.04651 0.07235-0.08268 0.07235-0.02067-0.0052-0.02067-0.03101 0.0052-0.02584 0.02067-0.04134l0.09302-0.12919q0.79582-1.0594 1.08-1.0594 0.41341 0 0.41341 0.53227 0 0.39791-0.42375 1.0542 0.26872-0.31006 0.5116-0.50643 0.19637-0.45992 0.48576-0.76998 0.29456-0.31006 0.5271-0.31006 0.1602 0 0.1602 0.13953 0 0.24805-0.7183 0.70797-0.11369 0.07235-0.34106 0.21187l-0.06201 0.05168q-0.07235 0.23771-0.07235 0.39274 0 0.43408 0.32556 0.43408 0.40308 0 0.8785-0.66663 0.10335-0.11369 0.12919-0.11369 0.031 0 0.031 0.03101z" />
         </clipPath>
         <TextPath
-          wrapped={wrapped}
           transform="matrix(9 0 0 9 -291.41 -509.77)"
           d="m37.011 58.065c-2.5146 4.1148-3.0635 5.3035-3.0635 5.3035l-0.01714 0.54864 0.26289 0.15431 0.17717-0.01714 0.36005-0.22289 1.1659-1.2802 1.1602-1.0116 0.68581-0.28575 0.32576 0.02286 0.14288 0.19431-0.33147 0.9487-1.2402 1.4459-0.49149 0.23432-0.36576-0.2286-0.12573-0.56579 0.43728-0.62495 0.67716-2.1583 2.3432 0.22289-1.2059 1.9774-0.40577 0.84583 0.21717 0.4915 0.33719-0.01714 0.57722-0.4572 1.0058-1.3202 2.4346-0.37148 0.28514 0.60644-0.45261 0.51727-0.31521-0.25863-0.2263 0.19397 0.15356 0.73549 0.69508 0.37987 1.4225 0.08082 1.4548-0.62234 1.0139-1.0386 0.46568-0.75366 1.0826-1.8448 1.359-1.4706 2.0574-0.98299s1.6431-0.26205 1.7401-0.22973c0.09699 0.03233 0.74357 0.38795 0.74357 0.38795s-0.2263 0.46877-0.29096 0.46877c-0.06466 0-1.0992 0.11315-1.0992 0.11315l-3.3622-0.46877-1.5033-0.24247-1.8266 0.2263-1.7781 1.2932-0.7274 1.1315v1.18l0.58192 0.5011 1.0022-0.21014 1.471-1.3902 0.25863-0.92138 0.09699-1.3902-0.84056-0.87289h-1.1315l-1.1639 0.5011-0.98604 0.88906-1.6811 6.773 6.8861-1.7134 0.71124-1.374 0.67892-0.66275s0.64658-0.35562 0.7759-0.25863c0.12932 0.09699 0.33946 0.69508 0.33946 0.69508l-0.8244 1.471-0.96988 0.7759-0.64658-0.30713 0.09741-1.6965-0.09741 3.2321 1.793-2.7145 0.37305 0.59691 1.2447-0.90522c0.28019-0.40412 0.56146-2.545 0.84056-1.2123 0 0-1.2285 1.9236-1.3417 2.1499-0.11315 0.22631 0.08082 0.79207 0.08082 0.79207s0.38795 0.03233 0.46878 0.01617c0.08082-0.01617 1.1962-1.3255 1.1962-1.3255l1.3255-1.9074-1.4871 2.3762 0.08083 0.88905 0.67891-0.06466 1.5841-2.0852 0.75974-0.75974 0.24247 0.45261-0.64659 1.3093-0.97962 1.6903 1.5615-2.0621 1.673-1.4226s-1.3335 1.1154-1.3335 1.2124c0 0.09699 0.04849 0.71124 0.04849 0.71124l0.66275-0.09699 0.8244-0.80823"
           fill="none"
           stroke="#fff"
-          stroke-width=".92604"
+          variants={!wrapped ? textVariants : undefined}
         />
       </StyledSvg>
     </StyledLogo>

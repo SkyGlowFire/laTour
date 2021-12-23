@@ -1,5 +1,5 @@
-import { motion, Variants } from 'framer-motion';
-import { FC } from 'react';
+import { motion, useViewportScroll, Variants } from 'framer-motion';
+import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Container from '~/components/styled/Container';
 
@@ -39,7 +39,7 @@ const contentVariants: Variants = {
   visible: {
     transition: {
       staggerChildren: 0.4,
-      delayChildren: 0.3,
+      // delayChildren: 0.3,
     },
   },
 };
@@ -72,58 +72,64 @@ const textVariants: Variants = {
   },
 };
 
-const Intro: FC<{ offsetY: number | null }> = ({ offsetY }) => {
-  return (
+const Intro: FC = () => {
+  const [offsetY, setoffsetY] = useState<null | number>(null);
+
+  useEffect(() => {
+    setoffsetY(window.scrollY);
+  }, []);
+  return offsetY !== null ? (
     <Container style={{ marginTop: '38vh' }}>
       <StyledIntro id="About">
-        {offsetY !== null && (
-          <motion.div
-            style={{
-              height: '100%',
-            }}
-            initial="hidden"
-            animate="visible"
-            transition={{ delayChildren: offsetY > 0 ? 0.3 : 2.1 }}
-          >
-            <Image variants={imageVariants} />
-            <Content as={motion.div} variants={contentVariants}>
-              <motion.h1 variants={textVariants}>
-                Escape to a sunny, tropical paradise
-              </motion.h1>
-              <motion.h2 variants={textVariants}>
-                Enjoy a perfect island getaway with Holiday Inn Resort Kandooma
-                Maldives
-              </motion.h2>
-              <motion.div variants={textVariants}>
-                <p>Welcome to Holiday Inn Resort Kandooma Maldives.</p>
-                <br />
-                <p>
-                  Create unforgettable memories on our family resort in the
-                  Maldives, located 40 minutes by speedboat from Velana
-                  International Airport, Male. Our beachfront hotel offers 160
-                  spacious and modern, Overwater, Beach or Garden villas, with
-                  stunning views of the glistening Maldivian sea and the
-                  unspoiled beach that surrounds our resort. Soak up the sun as
-                  you partake in a range of activities, whether you’re looking
-                  for adventure or relaxation; from surfing along the grand
-                  waves to indulging in soothing spa treatments at the Kandooma
-                  Spa by COMO Shambhala. Our little guests can play all day at
-                  the Kandoo Kids Club while you explore the treasures of the
-                  sea, assisted by our PADI certified 5-star Dive Centre. Feast
-                  on scrumptious meals, be it international or local cuisine as
-                  you dine with us.
-                </p>
-                <br />
-                <p>
-                  At Holiday Inn Resort Kandooma Maldives, we create a unique
-                  experience that is memorable for everyone.
-                </p>
-              </motion.div>
-            </Content>
-          </motion.div>
-        )}
+        <motion.div
+          style={{
+            height: '100%',
+          }}
+          initial="hidden"
+          animate="visible"
+          transition={{
+            delayChildren: offsetY === 0 ? 2.5 : 0,
+          }}
+        >
+          <Image variants={imageVariants} />
+          <Content as={motion.div} variants={contentVariants}>
+            <motion.h1 variants={textVariants}>
+              Escape to a sunny, tropical paradise
+            </motion.h1>
+            <motion.h2 variants={textVariants}>
+              Enjoy a perfect island getaway with Holiday Inn Resort Kandooma
+              Maldives
+            </motion.h2>
+            <motion.div variants={textVariants}>
+              <p>Welcome to Holiday Inn Resort Kandooma Maldives.</p>
+              <br />
+              <p>
+                Create unforgettable memories on our family resort in the
+                Maldives, located 40 minutes by speedboat from Velana
+                International Airport, Male. Our beachfront hotel offers 160
+                spacious and modern, Overwater, Beach or Garden villas, with
+                stunning views of the glistening Maldivian sea and the unspoiled
+                beach that surrounds our resort. Soak up the sun as you partake
+                in a range of activities, whether you’re looking for adventure
+                or relaxation; from surfing along the grand waves to indulging
+                in soothing spa treatments at the Kandooma Spa by COMO
+                Shambhala. Our little guests can play all day at the Kandoo Kids
+                Club while you explore the treasures of the sea, assisted by our
+                PADI certified 5-star Dive Centre. Feast on scrumptious meals,
+                be it international or local cuisine as you dine with us.
+              </p>
+              <br />
+              <p>
+                At Holiday Inn Resort Kandooma Maldives, we create a unique
+                experience that is memorable for everyone.
+              </p>
+            </motion.div>
+          </Content>
+        </motion.div>
       </StyledIntro>
     </Container>
+  ) : (
+    <></>
   );
 };
 

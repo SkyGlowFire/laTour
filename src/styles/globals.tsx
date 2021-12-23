@@ -20,7 +20,6 @@ const GlobalStyles = createGlobalStyle`
             display: none;
         }
         line-height: 1.3rem;
-        
     }
 
     a{

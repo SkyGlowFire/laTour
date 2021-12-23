@@ -1,4 +1,5 @@
-import { FC } from 'react';
+import { motion, useViewportScroll, Variants } from 'framer-motion';
+import { FC, useRef, useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Logo from './Logo';
 import Navbar from './Navbar';
@@ -17,20 +18,17 @@ const resizeHeader = keyframes`
 
 const StyledHeader = styled.header<{ wrapped: boolean }>`
   position: absolute;
-  z-index: 1000;
+  z-index: 10;
   top: 0;
   left: 0;
   width: 100%;
-  height: ${(p) => (p.wrapped ? '35vh' : '100vh')};
+  height: ${(p) => (p.wrapped ? '35vh' : '100vh')}
   overflow: visible;
   display: flex;
   align-items: center;
   justify-content: center;
   clip-path: ${(p) =>
     p.wrapped ? 'circle(400vh at 50% -365vh)' : 'circle(400vh at 50% -270vh)'};
-  animation: ${wrap} 0.7s linear 3s 1 forwards,
-    ${resizeHeader} 0.5s linear 3.1s 1 forwards;
-  animation-play-state: ${(p) => (p.wrapped ? 'paused' : 'running')};
 `;
 
 const StyledVideo = styled.video`
@@ -43,18 +41,56 @@ const StyledVideo = styled.video`
   pointer-events: none;
 `;
 
-const Header: FC<{ offsetY: number | null }> = ({ offsetY }) => {
-  return (
-    <StyledHeader wrapped={Boolean(offsetY)} id="Home">
-      <Navbar />
+interface HeaderProps {}
+
+const Header: FC<HeaderProps> = () => {
+  const [offsetY, setoffsetY] = useState<null | number>(null);
+
+  useEffect(() => {
+    setoffsetY(window.scrollY);
+  }, []);
+
+  const headerVariants: Variants = {
+    from: {
+      clipPath: 'circle(400vh at 50% -270vh)',
+      height: '100vh',
+    },
+    to: {
+      clipPath: 'circle(400vh at 50% -365vh)',
+      height: '35vh',
+      transition: {
+        height: {
+          delay: 2.4,
+          duration: 0.7,
+        },
+        clipPath: {
+          delay: 2.4,
+          duration: 0.7,
+        },
+      },
+    },
+  };
+
+  return offsetY !== null ? (
+    <StyledHeader
+      wrapped={offsetY > 0}
+      id="Home"
+      as={motion.header}
+      initial="from"
+      animate="to"
+      variants={offsetY === 0 ? headerVariants : undefined}
+    >
+      <Navbar wrapped={offsetY > 0} />
       <StyledVideo
         src="https://latour.s3.eu-north-1.amazonaws.com/video/header.mp4"
         autoPlay
         muted
         loop
       />
-      <Logo wrapped={Boolean(offsetY)} />
+      <Logo wrapped={offsetY > 0} />
     </StyledHeader>
+  ) : (
+    <></>
   );
 };
 

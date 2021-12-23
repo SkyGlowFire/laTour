@@ -3,18 +3,15 @@ import Intro from './Intro';
 import Offers from './Offers';
 import Villas from './Villas';
 import VideoBanner from './VideoBanner';
-import { useEffect, useState, useRef } from 'react';
+import styled from 'styled-components';
+
+const StyledHome = styled.div``;
 
 const Home = () => {
-  const [offsetY, setOffsetY] = useState<null | number>(null);
-
-  useEffect(() => {
-    setOffsetY(window.scrollY);
-  }, []);
   return (
-    <>
-      <Header offsetY={offsetY} />
-      <Intro offsetY={offsetY} />
+    <StyledHome>
+      <Header />
+      <Intro />
       <Villas />
       <VideoBanner
         video={'https://latour.s3.eu-north-1.amazonaws.com/video/boat.mp4'}
@@ -25,7 +22,7 @@ const Home = () => {
         ]}
       />
       <Offers />
-    </>
+    </StyledHome>
   );
 };
 

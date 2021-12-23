@@ -12,14 +12,18 @@ const StyledNav = styled(motion.div)`
 
 const NavLink = styled(motion.a)`
   display: inline-block;
-  padding: 0.4rem 0.8rem;
+  padding: 0.4rem;
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   text-decoration: none;
   transition: all 0.2s linear;
   &:hover {
     background-color: rgba(255, 255, 255, 0.9);
     color: rgba(0, 0, 0, 0.8);
+  }
+  @media ${(p) => p.theme.breakpoints.md} {
+    padding: 0.4rem 0.8rem;
+    font-size: 1.1rem;
   }
 `;
 
@@ -39,12 +43,13 @@ const variants: Variants = {
   },
 };
 
-const Navbar: FC = () => {
+const Navbar: FC<{ wrapped: boolean }> = ({ wrapped }) => {
   return (
     <StyledNav
       initial="hidden"
-      animate="visible"
-      transition={{ staggerChildren: 0.3, delayChildren: 3.6 }}
+      transition={{ staggerChildren: 0.3, delayChildren: wrapped ? 0 : 2.6 }}
+      whileInView="visible"
+      viewport={{ once: true }}
     >
       {links.map((link) => (
         <NavLink href={`#${link}`} variants={variants}>
