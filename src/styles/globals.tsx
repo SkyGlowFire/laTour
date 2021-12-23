@@ -5,7 +5,12 @@ const GlobalStyles = createGlobalStyle`
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        scroll-behavior: smooth;
+        /* scroll-behavior: smooth; */
+    }
+
+    #root{
+        width: 100%;
+        height: 100%;
     }
 
     body{
@@ -13,7 +18,9 @@ const GlobalStyles = createGlobalStyle`
         font-size: 16px;
         color: ${(p) => p.theme.textColors.primary};
         width: 100%;
-        min-height: 150vh;
+        max-height: 100vh;
+        overflow-y: auto;
+        /* min-height: 150vh; */
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */
         &::-webkit-scrollbar {

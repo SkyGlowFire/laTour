@@ -52,7 +52,7 @@ const Navbar: FC<{ wrapped: boolean }> = ({ wrapped }) => {
       viewport={{ once: true }}
     >
       {links.map((link) => (
-        <NavLink href={`#${link}`} variants={variants}>
+        <NavLink href={`#${link}`} variants={variants} key={`link-${link}`}>
           {link}
         </NavLink>
       ))}

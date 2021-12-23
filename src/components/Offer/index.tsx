@@ -3,15 +3,16 @@ import { offers } from '~/data/offers';
 import Header from './Header';
 import Page404 from '../Page404';
 import Info from './Info';
+import Layout from '../Layout';
 
 const Offer = () => {
   const { id } = useParams();
   const offer = offers.find((offer) => offer.id === Number(id));
   return offer ? (
-    <div>
+    <Layout>
       <Header offer={offer} />
       <Info offer={offer} />
-    </div>
+    </Layout>
   ) : (
     <Page404 />
   );

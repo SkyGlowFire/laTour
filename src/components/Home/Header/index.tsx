@@ -22,7 +22,7 @@ const StyledHeader = styled.header<{ wrapped: boolean }>`
   top: 0;
   left: 0;
   width: 100%;
-  height: ${(p) => (p.wrapped ? '35vh' : '100vh')}
+  height: ${(p) => (p.wrapped ? '35%' : '100%')}
   overflow: visible;
   display: flex;
   align-items: center;
@@ -35,7 +35,7 @@ const StyledVideo = styled.video`
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   object-fit: cover;
   pointer-events: none;
@@ -53,11 +53,11 @@ const Header: FC<HeaderProps> = () => {
   const headerVariants: Variants = {
     from: {
       clipPath: 'circle(400vh at 50% -270vh)',
-      height: '100vh',
+      height: '100%',
     },
     to: {
       clipPath: 'circle(400vh at 50% -365vh)',
-      height: '35vh',
+      height: '35%',
       transition: {
         height: {
           delay: 2.4,

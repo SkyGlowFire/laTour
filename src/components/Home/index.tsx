@@ -3,13 +3,11 @@ import Intro from './Intro';
 import Offers from './Offers';
 import Villas from './Villas';
 import VideoBanner from './VideoBanner';
-import styled from 'styled-components';
-
-const StyledHome = styled.div``;
+import Layout from '../Layout';
 
 const Home = () => {
   return (
-    <StyledHome>
+    <Layout>
       <Header />
       <Intro />
       <Villas />
@@ -22,7 +20,7 @@ const Home = () => {
         ]}
       />
       <Offers />
-    </StyledHome>
+    </Layout>
   );
 };
 

@@ -1,5 +1,5 @@
 import { motion, Variants } from 'framer-motion';
-import { FC } from 'react';
+import { FC, Fragment } from 'react';
 import styled from 'styled-components';
 import Container from '~/components/styled/Container';
 
@@ -82,10 +82,10 @@ const VideoBanner: FC<VideoBannerProps> = ({ video, title, text }) => {
       <Content variants={mainVariants} as={motion.div}>
         <motion.h1 variants={textVariants}>{title}</motion.h1>
         {text.map((item) => (
-          <>
+          <Fragment key={`text-${item.slice(0, 7)}`}>
             <motion.p variants={textVariants}>{item}</motion.p>
             <br />
-          </>
+          </Fragment>
         ))}
       </Content>
     </Container>

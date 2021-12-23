@@ -23,7 +23,7 @@ const Info: FC<InfoProps> = ({ villa }) => {
         <h4 style={{ marginBottom: '1rem' }}>Amenities</h4>
         <ul>
           {villa.amenities.map((amenity) => (
-            <li>{amenity}</li>
+            <li key={`am-${amenity}`}>{amenity}</li>
           ))}
         </ul>
       </Container>

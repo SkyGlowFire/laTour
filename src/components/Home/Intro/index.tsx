@@ -1,4 +1,4 @@
-import { motion, useViewportScroll, Variants } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Container from '~/components/styled/Container';
@@ -39,7 +39,6 @@ const contentVariants: Variants = {
   visible: {
     transition: {
       staggerChildren: 0.4,
-      // delayChildren: 0.3,
     },
   },
 };
@@ -79,7 +78,7 @@ const Intro: FC = () => {
     setoffsetY(window.scrollY);
   }, []);
   return offsetY !== null ? (
-    <Container style={{ marginTop: '38vh' }}>
+    <Container style={{ paddingTop: '38vh' }}>
       <StyledIntro id="About">
         <motion.div
           style={{
