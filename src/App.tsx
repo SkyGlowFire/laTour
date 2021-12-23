@@ -28,7 +28,6 @@ function App() {
             <Route path="/offers/:id" element={<Offer />} />
             <Route path="/*" element={<Page404 />} />
           </Routes>
-          {/* <Footer /> */}
         </AnimatePresence>
       </Suspense>
     </>

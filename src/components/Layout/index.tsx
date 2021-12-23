@@ -12,6 +12,7 @@ const variants: Variants = {
     // x: 0,
     transition: {
       when: 'beforeChildren',
+      duration: 0.4,
     },
   },
   exit: {
