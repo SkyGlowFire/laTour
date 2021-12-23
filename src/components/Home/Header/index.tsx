@@ -77,7 +77,8 @@ const Header: FC<HeaderProps> = () => {
       id="Home"
       as={motion.header}
       initial="from"
-      animate="to"
+      whileInView="to"
+      viewport={{ once: true }}
       variants={offsetY === 0 ? headerVariants : undefined}
     >
       <Navbar wrapped={offsetY > 0} />

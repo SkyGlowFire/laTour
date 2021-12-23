@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 
 const StyledLogo = styled.div`
-  width: 120px;
+  width: 100px;
   height: 80px;
   padding: 1rem 0.5rem;
   border: 1px solid #4287f5;
   z-index: 10;
+  @media ${(p) => p.theme.breakpoints.md} {
+    width: 120px;
+  }
 `;
 const StyledSvg = styled.svg`
   width: 100%;
@@ -16,8 +19,8 @@ const Logo = () => {
   return (
     <StyledLogo>
       <StyledSvg
-        width="230mm"
-        height="80mm"
+        // width="230mm"
+        // height="80mm"
         version="1.1"
         viewBox="0 0 230 80"
         xmlns="http://www.w3.org/2000/svg"
